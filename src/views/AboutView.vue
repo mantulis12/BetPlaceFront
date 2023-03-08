@@ -1,9 +1,22 @@
 <template>
   <div class="container">
-  <div class="col-md-12">
     <h1>Bets</h1>
-    <div class="row mt-10 p-10 table-bordered" v-for="event in events">
-      <a @click="selectTeam(event.Id, event.Team1)" class="btn btn-info" >{{ event.Team1}}</a> <a class="btn btn-default" @click="selectTeam(event.Id, 'Draw')">Draw</a> <a  @click="selectTeam(event.Id, event.Team2)" class="btn btn-danger">{{ event.Team2 }}</a>
+    <div class="row">
+      <div class="col-md-12">
+        <b>Current Balance</b>: {{ balance }} Eur
+      </div>
+    </div>
+  <div class="col-md-12">
+    <div class="row mt-10 p-10 table-bordered" style="padding: 10px;" v-for="event in events">
+      <div class="col-md-4 text-center">
+        <a @click="selectTeam(event.Id, event.Team1)" class="btn btn-info" >{{ event.Team1}}</a>
+      </div>
+      <div class="col-md-4 text-center">
+      <a class="btn btn-default" @click="selectTeam(event.Id, 'Draw')">Draw</a>
+      </div>
+      <div class="col-md-4 text-center">
+      <a  @click="selectTeam(event.Id, event.Team2)" class="btn btn-danger">{{ event.Team2 }}</a>
+      </div>
     </div>
     <div class="mt-10" v-show="teamsSelected">
       Bet for: {{ selectedTeam }} <br/>
@@ -18,6 +31,7 @@ import axios from 'axios';
 export default {
   data(){
     return {
+      balance: 0,
       events: {},
       selectedEvent: 0,
       selectedTeam: "",
@@ -26,9 +40,15 @@ export default {
     }
   },
   mounted() {
+    if (!localStorage.getItem('token')) {
+      this.$router.push('/');
+    }
     axios.get("https://localhost:7200/BetEvents/apigetall").then(r => {
       this.events = r.data;
-    })
+    });
+    axios.post("https://localhost:7200/api/getbalance", {Token: localStorage.getItem('token')}).then(r => {
+      this.balance = r.data.balance;
+    });
   },
   methods: {
     selectTeam(eventId, TeamName){

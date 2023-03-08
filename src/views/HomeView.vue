@@ -12,7 +12,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      errorMessage: "Error"
+      errorMessage: ""
     }
   },
   methods: {

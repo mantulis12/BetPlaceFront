@@ -8,7 +8,7 @@ import HelloWorld from './components/HelloWorld.vue'
     <div class="navbar">
       <nav class="nav-justified">
         <RouterLink class="btn btn-link" to="/">Home</RouterLink>
-        <RouterLink class="btn btn-link" to="/about">About</RouterLink>
+        <RouterLink class="btn btn-link" to="/about">Betting</RouterLink>
         <RouterLink class="btn btn-link" to="/betting-history">Betting History</RouterLink>
       </nav>
     </div>
