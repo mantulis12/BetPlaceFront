@@ -20,8 +20,8 @@
     </div>
     <div class="mt-10" v-show="teamsSelected">
       Bet for: {{ selectedTeam }} <br/>
-      <input v-model="amount"/> <br/>
-      <input @click="placeBet()" type="submit" class="btn btn-success" value="Place Bet"/>
+      <input style="margin-top: 10px; width: 100%;" class="mt-10" v-model="amount"/>
+      <input @click="placeBet()" type="submit" style="margin-top: 10px; width: 100%;" class="btn btn-success mt-10" value="Place Bet"/>
     </div>
   </div>
   </div>
